@@ -10,6 +10,7 @@ import logging
 from typing import Any
 import xml.etree.ElementTree as ET
 
+from .air_purifier import HVAC_OPTIONS_REQUEST, AirPurifierStatus, parse_air_purifier_status
 from .mitsubishi_api import MitsubishiAPI
 from .mitsubishi_atw import (
     EcodanStatus,
@@ -118,6 +119,18 @@ class MitsubishiController:
         """
         response = self.api.send_status_request(connect=connect)  # may raise
         return self._parse_status_response(response)
+
+    def fetch_air_purifier_status(self) -> AirPurifierStatus:
+        """Manually probe ATA HVAC options without changing normal cached state.
+
+        This is a get request, not a purifier control command. In particular,
+        leave CONNECT/ECHONET and all HVAC settings untouched. A missing 0x42
+        response means not returned, not unsupported and not switched off.
+        """
+        if self.is_atw:
+            raise ValueError("The HVAC options probe is only for air-to-air units")
+        response = self.api.send_command(HVAC_OPTIONS_REQUEST, connect=None)
+        return parse_air_purifier_status(response)
 
     def set_cloud_connect(self, enabled: bool) -> ParsedDeviceState:
         """Enable or disable the adapter's connection to the MELCloud servers.

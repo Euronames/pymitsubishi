@@ -8,6 +8,7 @@ Mitsubishi air conditioners via the MAC-577IF-2E WiFi adapter.
 __version__ = "0.6.1"
 
 # Import main classes for easy access
+from .air_purifier import AirPurifierStatus
 from .mitsubishi_api import MitsubishiAPI
 from .mitsubishi_atw import (
     EcodanOperationMode,
@@ -38,6 +39,7 @@ __all__ = [
     # Main API classes
     "MitsubishiAPI",
     "MitsubishiController",
+    "AirPurifierStatus",
     # Enums and data classes
     "PowerOnOff",
     "DriveMode",
