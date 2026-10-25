@@ -5,7 +5,7 @@ This library provides a Python interface for controlling and monitoring
 Mitsubishi air conditioners via the MAC-577IF-2E WiFi adapter.
 """
 
-__version__ = "0.6.1"
+__version__ = "0.6.2.dev2026102501"
 
 # Import main classes for easy access
 from .air_purifier import AirPurifierStatus

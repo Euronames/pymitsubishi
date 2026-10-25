@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pymitsubishi"
-version = "0.6.1"
+version = "0.6.2.dev2026102501"
 description = "Control and monitor Mitsubishi Air Conditioners"
 readme = "README.md"
 authors = [
